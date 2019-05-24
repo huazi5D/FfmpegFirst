@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     // Used to load the 'native-lib' library on application startup.
     static {
-        System.loadLibrary("native-lib");
+        System.loadLibrary("ff-decode");
     }
 
     @Override
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     public void onButtonClick(View view) {
         // Example of a call to a native method
         TextView tv = findViewById(R.id.sample_text);
-        int a = getAvFormatInfo(/*Environment.getExternalStorageState() + File.separator +*/ "sdcard/111/test.mp4");
+        int a = Decode.decodeMp4ToYUV("sdcard/111/test.mp4");
         tv.setText("" + a);
         stringFromJNI();
     }
