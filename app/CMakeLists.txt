@@ -6,32 +6,12 @@ add_library( native-lib SHARED src/main/cpp/native-lib.cpp )
 
 set(distribution_DIR ${CMAKE_SOURCE_DIR}/src/main/jniLibs)
 
-add_library( avcodec SHARED IMPORTED)
-set_target_properties( avcodec PROPERTIES IMPORTED_LOCATION ${distribution_DIR}/armeabi-v7a/libavcodec.so)
-
-add_library( avfilter SHARED IMPORTED)
-set_target_properties( avfilter PROPERTIES IMPORTED_LOCATION ${distribution_DIR}/armeabi-v7a/libavfilter.so)
-
-add_library( avformat SHARED IMPORTED)
-set_target_properties( avformat PROPERTIES IMPORTED_LOCATION ${distribution_DIR}/armeabi-v7a/libavformat.so)
-
-add_library( avutil SHARED IMPORTED)
-set_target_properties( avutil PROPERTIES IMPORTED_LOCATION ${distribution_DIR}/armeabi-v7a/libavutil.so)
-
-add_library( swresample SHARED IMPORTED)
-set_target_properties( swresample PROPERTIES IMPORTED_LOCATION ${distribution_DIR}/armeabi-v7a/libswresample.so)
-
-add_library( swscale SHARED IMPORTED)
-set_target_properties( swscale PROPERTIES IMPORTED_LOCATION ${distribution_DIR}/armeabi-v7a/libswscale.so)
+add_library( ffmpeg SHARED IMPORTED)
+set_target_properties( ffmpeg PROPERTIES IMPORTED_LOCATION ${distribution_DIR}/armeabi-v7a/libffmpeg.so)
 
 include_directories(src/main/cpp/include)
 
 target_link_libraries( native-lib
-                       avcodec
-                       avfilter
-                       avformat
-                       avutil
-                       swresample
-                       swscale
+                       ffmpeg
 
                        ${log-lib} )

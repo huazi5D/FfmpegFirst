@@ -23,15 +23,17 @@ JNIEXPORT jint JNICALL Java_hz_ffmpegfirst_MainActivity_getAvFormatInfo(JNIEnv *
 
     // 输入文件
     const char * input = env->GetStringUTFChars(filePath, nullptr);
+    __android_log_print(ANDROID_LOG_DEBUG, "zhx", "%s", input);
     FILE * yuv = fopen("sdcard/111/av/video.yuv", "wb+");
-
-    av_register_all();
 
     AVFormatContext* pFormatCtx = nullptr;
 
-    if (avformat_open_input(&pFormatCtx, input, nullptr, nullptr) != 0)
+    int err_code;
+    char buf[1024];
+    if ((err_code = avformat_open_input(&pFormatCtx, input, nullptr, nullptr)) != 0)
     {
-        __android_log_print(ANDROID_LOG_DEBUG,"zhx","文件打开失败！！！");
+        av_strerror(err_code, buf, 1024);
+        __android_log_print(ANDROID_LOG_DEBUG,"zhx","文件打开失败！！！ %d(%s)", err_code, buf);
         return -1;
     }
 
