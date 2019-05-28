@@ -10,6 +10,8 @@ extern "C" {
 #include <libavformat/avformat.h>
 #include "NativeDecode.h"
 
+}
+
 jint NativeDecode::decode_mp4_to_yuv(JNIEnv *env, jclass clazz, jstring file_path) {
     int ret = 0;
 
@@ -61,6 +63,7 @@ jint NativeDecode::decode_mp4_to_yuv(JNIEnv *env, jclass clazz, jstring file_pat
                 return -1;
             }
 
+            char* buf[100];
             ret = avcodec_receive_frame(codecContext, yuvFrame);
             if (ret != 0) {
                 __android_log_print(ANDROID_LOG_DEBUG,"zhx","avcodec_receive_frame: faild");
@@ -77,4 +80,3 @@ jint NativeDecode::decode_mp4_to_yuv(JNIEnv *env, jclass clazz, jstring file_pat
     return 0;
 }
 
-}
