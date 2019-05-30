@@ -56,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         TextView tv = findViewById(R.id.sample_text);
         int a = Decode.decodeMp4ToYUV("sdcard/111/test.mp4");
         tv.setText("" + a);
-        stringFromJNI();
     }
 
     /**
