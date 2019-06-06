@@ -45,6 +45,7 @@ jint NativeDecode::decode_mp4_to_yuv(JNIEnv *env, jclass clazz, jstring file_pat
     avcodec_open2(codecContext, avcodec_find_decoder(codecContext->codec_id), nullptr);
 
     AVFrame *originFrame = av_frame_alloc();
+    //yuvFrame分配空间，该函数并没有为AVFrame的像素数据分配空间，需要使用av_image_fill_arrays分配
     AVFrame *yuvFrame = av_frame_alloc();
 
     uint8_t* outBuffer = (uint8_t *) av_malloc(static_cast<size_t>(av_image_get_buffer_size(AV_PIX_FMT_YUV420P, codecContext->width, codecContext->height, 1)));
